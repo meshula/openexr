@@ -10,6 +10,10 @@
 
 #include <string.h>
 
+// suppress missing braces warning when compiling as c++
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-braces"
+
 /**************************************/
 
 exr_result_t
@@ -265,3 +269,4 @@ exr_attr_chlist_destroy (exr_context_t ctxt, exr_attr_chlist_t* clist)
     }
     return EXR_ERR_SUCCESS;
 }
+#pragma clang diagnostic pop

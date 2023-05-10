@@ -11,6 +11,10 @@
 
 /**************************************/
 
+// suppress missing braces warning when compiling under C++
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-braces"
+
 static exr_result_t
 validate_req_attr (
     struct _internal_exr_context* f,
@@ -633,3 +637,5 @@ internal_exr_validate_write_part (
 
     return EXR_ERR_SUCCESS;
 }
+
+#pragma clang diagnostic pop

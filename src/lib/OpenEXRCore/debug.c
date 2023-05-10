@@ -72,7 +72,7 @@ print_attr (const exr_attribute_t* a, int verbose)
                 (double) a->chromaticities->white_y);
             break;
         case EXR_ATTR_COMPRESSION: {
-            static char* compressionnames[] = {
+            static const char* compressionnames[] = {
                 "none",
                 "rle",
                 "zips",

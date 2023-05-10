@@ -10,6 +10,10 @@
 
 #include <string.h>
 
+// suppress missing braces when compiling as C++
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-braces"
+
 struct _internal_exr_attr_map
 {
     const char*          name;
@@ -1131,3 +1135,5 @@ exr_attr_list_remove (
 
     return attr_destroy (pctxt, attr);
 }
+
+#pragma clang diagnostic pop

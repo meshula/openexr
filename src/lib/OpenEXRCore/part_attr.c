@@ -564,6 +564,12 @@ exr_copy_unset_attributes (
 
 /**************************************/
 
+#ifdef __cplusplus
+#define EXR_DECLTYPE(a) (decltype(a))
+#else
+#define EXR_DECLTYPE(a)
+#endif
+
 #define REQ_ATTR_GET_IMPL(name, entry, t)                                      \
     EXR_PROMOTE_CONST_CONTEXT_AND_PART_OR_ERROR (ctxt, part_index);            \
     if (!out)                                                                  \
@@ -578,7 +584,7 @@ exr_copy_unset_attributes (
                 "Invalid required attribute type '%s' for '%s'",               \
                 part->name->type_name,                                         \
                 #name));                                                       \
-        *out = part->name->entry;                                              \
+        *out = EXR_DECLTYPE(*out) part->name->entry;                                              \
         return EXR_UNLOCK_WRITE_AND_RETURN_PCTXT (EXR_ERR_SUCCESS);            \
     }                                                                          \
     return EXR_UNLOCK_WRITE_AND_RETURN_PCTXT (EXR_ERR_NO_ATTR_BY_NAME)
