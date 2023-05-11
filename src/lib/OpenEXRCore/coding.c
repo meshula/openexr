@@ -26,7 +26,7 @@ internal_coding_fill_channel_info (
     if (chans <= 5) { chanfill = builtinextras; }
     else
     {
-        chanfill = pctxt->alloc_fn (
+        chanfill = (exr_coding_channel_info_t*) pctxt->alloc_fn (
             (size_t) (chans) * sizeof (exr_coding_channel_info_t));
         if (chanfill == NULL)
             return pctxt->standard_error (pctxt, EXR_ERR_OUT_OF_MEMORY);
@@ -252,13 +252,13 @@ internal_decode_alloc_buffer (
         internal_decode_free_buffer (decode, bufid, buf, cursz);
 
         if (decode->alloc_fn)
-            curbuf = decode->alloc_fn (bufid, newsz);
+            curbuf = (uint8_t*) decode->alloc_fn (bufid, newsz);
         else
         {
             EXR_PROMOTE_CONST_CONTEXT_AND_PART_OR_ERROR_NO_LOCK (
                 decode->context, decode->part_index);
 
-            curbuf = pctxt->alloc_fn (newsz);
+            curbuf = (uint8_t*) pctxt->alloc_fn (newsz);
         }
 
         if (curbuf == NULL)

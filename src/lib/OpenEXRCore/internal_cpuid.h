@@ -3,6 +3,9 @@
 ** Copyright Contributors to the OpenEXR Project.
 */
 
+#ifndef OPENEXR_CORE_INTERNAL_CPUID_H
+#define OPENEXR_CORE_INTERNAL_CPUID_H
+
 #if defined(__x86_64__) || defined(_M_X64)
 #    ifndef _WIN32
 #        include <cpuid.h>
@@ -84,3 +87,5 @@ static inline int has_native_half ()
     return 0;
 #endif
 }
+
+#endif // OPENEXR_CORE_INTERNAL_CPUID_H

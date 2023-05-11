@@ -398,8 +398,6 @@ LossyDctEncoder_execute (LossyDctEncoder* e)
         for (int blockx = 0; blockx < numBlocksX; ++blockx)
         {
             uint16_t h;
-            uint16_t tmpShortXdr;
-            uint8_t* tmpCharPtr;
 
             for (size_t chan = 0; chan < numComp; ++chan)
             {

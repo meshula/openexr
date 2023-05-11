@@ -348,8 +348,8 @@ extract_chunk_leader (
             return ctxt->print_error (
                 ctxt,
                 EXR_ERR_BAD_CHUNK_LEADER,
-                "Invalid chunk size reconstructing chunk table: found out of range %"PRId64,
-                leaderdata->deep_data[1]);
+                "Invalid chunk size reconstructing chunk table: found out of range %zu",
+                (size_t) leaderdata->deep_data[1]);
         }
         leaderdata->packed_size = leaderdata->deep_packed_size;
         nextoffset += leaderdata->deep_packed_size;
@@ -363,8 +363,8 @@ extract_chunk_leader (
             return ctxt->print_error (
                 ctxt,
                 EXR_ERR_BAD_CHUNK_LEADER,
-                "Invalid chunk size reconstructing chunk table: found out of range %d",
-                data[rdcnt]);
+                "Invalid chunk size reconstructing chunk table: found out of range %zu",
+                (size_t) data[rdcnt]);
         }
         leaderdata->packed_size = (uint64_t) data[rdcnt];
         nextoffset += leaderdata->packed_size;
@@ -577,7 +577,7 @@ extract_chunk_table (
             // file is incomplete (i.e. crashed during write and didn't
             // get a complete chunk table), so just do them one at a time
             if (ctxt->file_size > 0) maxoff = (uint64_t) ctxt->file_size;
-            for (size_t ci = 0; ci < part->chunk_count; ++ci)
+            for (int ci = 0; ci < part->chunk_count; ++ci)
             {
                 uint64_t cchunk = one_to_native64 (ctable[ci]);
                 if (cchunk < chunkoff || cchunk >= maxoff) complete = 0;
@@ -1265,7 +1265,7 @@ exr_read_tile_chunk_info (
         else if (fsize > 0)
         {
             uint64_t finpos = dataoff + (uint64_t) tdata[4];
-            if (finpos > fsize)
+            if (finpos > (uint64_t) fsize)
             {
                 return pctxt->print_error (
                     pctxt,

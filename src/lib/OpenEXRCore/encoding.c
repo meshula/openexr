@@ -350,7 +350,7 @@ exr_encoding_run (
             rv = internal_encode_alloc_buffer (
                 encode,
                 EXR_TRANSCODE_BUFFER_PACKED,
-                &(encode->packed_buffer),
+                (void**) &(encode->packed_buffer),
                 &(encode->packed_alloc_size),
                 packed_bytes);
 
@@ -441,7 +441,7 @@ exr_encoding_destroy (exr_const_context_t ctxt, exr_encode_pipeline_t* encode)
         internal_encode_free_buffer (
             encode,
             EXR_TRANSCODE_BUFFER_PACKED,
-            &(encode->packed_buffer),
+            (void**) &(encode->packed_buffer),
             &(encode->packed_alloc_size));
         internal_encode_free_buffer (
             encode,

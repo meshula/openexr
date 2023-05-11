@@ -46,7 +46,7 @@ DctCoderChannelData_push_row (DctCoderChannelData* d, uint8_t* r)
     if (d->_size == d->_row_alloc_count)
     {
         size_t    nsize = d->_size == 0 ? 16 : ((d->_size * 3) / 2);
-        uint8_t** n     = internal_exr_alloc (nsize * sizeof (uint8_t*));
+        uint8_t** n     = (uint8_t**) internal_exr_alloc (nsize * sizeof (uint8_t*));
         if (n)
         {
             if (d->_rows)

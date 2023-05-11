@@ -39,7 +39,7 @@ update_pack_unpack_ptrs (exr_decode_pipeline_t* decode)
                 (void**) &(decode->sample_count_table),
                 &(decode->sample_count_alloc_size));
 
-            decode->sample_count_table = decode->packed_sample_count_table;
+            decode->sample_count_table = (int32_t*) decode->packed_sample_count_table;
             rv                         = EXR_ERR_SUCCESS;
         }
         else
@@ -62,7 +62,7 @@ update_pack_unpack_ptrs (exr_decode_pipeline_t* decode)
         internal_decode_free_buffer (
             decode,
             EXR_TRANSCODE_BUFFER_UNPACKED,
-            &(decode->unpacked_buffer),
+            (void**) &(decode->unpacked_buffer),
             &(decode->unpacked_alloc_size));
 
         decode->unpacked_buffer = decode->packed_buffer;
@@ -73,7 +73,7 @@ update_pack_unpack_ptrs (exr_decode_pipeline_t* decode)
         rv = internal_decode_alloc_buffer (
             decode,
             EXR_TRANSCODE_BUFFER_UNPACKED,
-            &(decode->unpacked_buffer),
+            (void**) &(decode->unpacked_buffer),
             &(decode->unpacked_alloc_size),
             decode->chunk.unpacked_size);
     }
@@ -171,7 +171,7 @@ default_read_chunk (exr_decode_pipeline_t* decode)
             rv = internal_decode_alloc_buffer (
                 decode,
                 EXR_TRANSCODE_BUFFER_PACKED,
-                &(decode->packed_buffer),
+                (void**) &(decode->packed_buffer),
                 &(decode->packed_alloc_size),
                 decode->chunk.packed_size);
             if (rv != EXR_ERR_SUCCESS) return rv;
@@ -189,7 +189,7 @@ default_read_chunk (exr_decode_pipeline_t* decode)
         rv = internal_decode_alloc_buffer (
             decode,
             EXR_TRANSCODE_BUFFER_PACKED,
-            &(decode->packed_buffer),
+            (void**) &(decode->packed_buffer),
             &(decode->packed_alloc_size),
             decode->chunk.packed_size);
         if (rv != EXR_ERR_SUCCESS) return rv;
@@ -705,12 +705,12 @@ exr_decoding_destroy (exr_const_context_t ctxt, exr_decode_pipeline_t* decode)
         internal_decode_free_buffer (
             decode,
             EXR_TRANSCODE_BUFFER_PACKED,
-            &(decode->packed_buffer),
+            (void**) &(decode->packed_buffer),
             &(decode->packed_alloc_size));
         internal_decode_free_buffer (
             decode,
             EXR_TRANSCODE_BUFFER_UNPACKED,
-            &(decode->unpacked_buffer),
+            (void**) &(decode->unpacked_buffer),
             &(decode->unpacked_alloc_size));
         internal_decode_free_buffer (
             decode,

@@ -352,6 +352,7 @@ convertFloatToHalf64_neon (uint16_t* dst, float* src)
 // F16C conversion - Assumes aligned src and dst
 //
 
+#ifndef IMF_HAVE_NEON_AARCH64
 static void
 convertFloatToHalf64_f16c (uint16_t* dst, float* src)
 {
@@ -410,6 +411,8 @@ convertFloatToHalf64_f16c (uint16_t* dst, float* src)
     convertFloatToHalf64_scalar (dst, src);
 #endif /* IMF_HAVE_GCC_INLINEASM_X86 */
 }
+
+#endif // ifndef IMF_HAVE_NEON_AARCH64
 
 //
 // Convert an 8x8 block of HALF from zig-zag order to
@@ -500,6 +503,8 @@ fromHalfZigZag_scalar (uint16_t* src, float* dst)
     dst[62] = half_to_float (src[62]);
     dst[63] = half_to_float (src[63]);
 }
+
+#ifndef IMF_HAVE_NEON_AARCH64
 
 //
 // If we can form the correct ordering in xmm registers,
@@ -759,6 +764,9 @@ fromHalfZigZag_f16c (uint16_t* src, float* dst)
     fromHalfZigZag_scalar (src, dst);
 #endif /* defined IMF_HAVE_GCC_INLINEASM_X86_64 */
 }
+
+#endif // ifndef IMF_HAVE_NEON_AARCH64
+
 
 #ifdef IMF_HAVE_NEON_AARCH64
 
@@ -1256,6 +1264,8 @@ dctInverse8x8_sse2 (float* data, int zeroedRows)
 #endif /* IMF_HAVE_SSE2 */
 }
 
+#ifndef IMF_HAVE_NEON_AARCH64
+
 static void
 dctInverse8x8_sse2_0 (float* data)
 {
@@ -1303,6 +1313,9 @@ dctInverse8x8_sse2_7 (float* data)
 {
     dctInverse8x8_sse2 (data, 7);
 }
+
+#endif // ifndef IMF_HAVE_NEON_AARCH64
+
 
 //
 // AVX Implementation
@@ -1770,6 +1783,8 @@ dctInverse8x8_avx (float* data, int zeroedRows)
 #endif /*  IMF_HAVE_GCC_INLINEASM_X86_64 */
 }
 
+#ifndef IMF_HAVE_NEON_AARCH64
+
 static void
 dctInverse8x8_avx_0 (float* data)
 {
@@ -1817,6 +1832,8 @@ dctInverse8x8_avx_7 (float* data)
 {
     dctInverse8x8_avx (data, 7);
 }
+
+#endif
 
 //
 // Full 8x8 Forward DCT:

@@ -301,7 +301,7 @@ unpack3 (const uint8_t b[3], uint16_t s[16])
 static exr_result_t
 compress_b44_impl (exr_encode_pipeline_t* encode, int flat_field)
 {
-    uint8_t*       out  = encode->compressed_buffer;
+    uint8_t*       out  = (uint8_t*) encode->compressed_buffer;
     uint64_t       nOut = 0;
     uint8_t *      scratch, *tmp;
     const uint8_t* packed;
@@ -318,12 +318,12 @@ compress_b44_impl (exr_encode_pipeline_t* encode, int flat_field)
     if (rv != EXR_ERR_SUCCESS) return rv;
 
     nOut   = 0;
-    packed = encode->packed_buffer;
+    packed = (const uint8_t*) encode->packed_buffer;
     for (int y = 0; y < encode->chunk.height; ++y)
     {
         int cury = y + encode->chunk.start_y;
 
-        scratch = encode->scratch_buffer_1;
+        scratch = (uint8_t*) encode->scratch_buffer_1;
         for (int c = 0; c < encode->channel_count; ++c)
         {
             const exr_coding_channel_info_t* curc = encode->channels + c;
@@ -355,7 +355,7 @@ compress_b44_impl (exr_encode_pipeline_t* encode, int flat_field)
     }
 
     nOut    = 0;
-    scratch = encode->scratch_buffer_1;
+    scratch = (uint8_t*) encode->scratch_buffer_1;
     for (int c = 0; c < encode->channel_count; ++c)
     {
         const exr_coding_channel_info_t* curc = encode->channels + c;
@@ -477,9 +477,9 @@ uncompress_b44_impl (
     void*                  uncompressed_data,
     uint64_t               uncomp_buf_size)
 {
-    const uint8_t* in      = compressed_data;
-    uint8_t*       out     = uncompressed_data;
-    uint8_t*       scratch = decode->scratch_buffer_1;
+    const uint8_t* in      = (const uint8_t*) compressed_data;
+    uint8_t*       out     = (uint8_t*) uncompressed_data;
+    uint8_t*       scratch = (uint8_t*) decode->scratch_buffer_1;
     uint8_t*       tmp;
     uint16_t *     row0, *row1, *row2, *row3;
     uint64_t       n, nBytes, bpl = 0, bIn = 0;
@@ -566,7 +566,7 @@ uncompress_b44_impl (
     {
         int cury = y + decode->chunk.start_y;
 
-        scratch = decode->scratch_buffer_1;
+        scratch = (uint8_t*) decode->scratch_buffer_1;
         for (int c = 0; c < decode->channel_count; ++c)
         {
             const exr_coding_channel_info_t* curc = decode->channels + c;

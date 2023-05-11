@@ -781,7 +781,8 @@ hufEncode (
             *out = (c << (8 - lc)) & 0xff;
         }
 
-        *outbytes = (((uintptr_t) out) - ((uintptr_t) outStart)) * 8 + (uint32_t) (lc);
+        *outbytes = (uint32_t)
+                    (((uintptr_t) out) - ((uintptr_t) outStart)) * 8 + (uint32_t) (lc);
     }
 
     return rv;
@@ -1436,7 +1437,7 @@ fasthuf_initialize (
                         "Huffman decode error (Invalid symbol in header)");
                 return EXR_ERR_CORRUPT_CHUNK;
             }
-            fhd->_idToSymbol[mapping[codeLen]] = symbol;
+            fhd->_idToSymbol[mapping[codeLen]] = (int) symbol;
             mapping[codeLen]++;
         }
         else if (codeLen == (uint64_t) LONG_ZEROCODE_RUN)
@@ -1851,12 +1852,12 @@ internal_huf_decompress (
     {
         FastHufDecoder* fhd = (FastHufDecoder*) spare;
 
-        rv = fasthuf_initialize (pctxt, fhd, &ptr, nCompressed - hufInfoBlockSize, im, iM, iM);
+        rv = fasthuf_initialize (pctxt, fhd, &ptr, (int) (nCompressed - hufInfoBlockSize), im, iM, iM);
         if (rv == EXR_ERR_SUCCESS)
         {
             if ( (uint64_t)(ptr - compressed) + nBytes > nCompressed )
                 return EXR_ERR_OUT_OF_MEMORY;
-            rv = fasthuf_decode (pctxt, fhd, ptr, nBits, raw, nRaw);
+            rv = fasthuf_decode (pctxt, fhd, ptr, nBits, raw, (int) nRaw);
         }
     }
     else

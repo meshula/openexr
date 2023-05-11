@@ -190,7 +190,7 @@ internal_exr_undo_dwaa (
         if (rv == EXR_ERR_SUCCESS)
             rv = DwaCompressor_uncompress (
                 &dwaa,
-                compressed_data,
+                (uint8_t*) compressed_data,
                 comp_buf_size,
                 uncompressed_data,
                 uncompressed_size);
@@ -224,7 +224,7 @@ internal_exr_undo_dwab (
         if (rv == EXR_ERR_SUCCESS)
             rv = DwaCompressor_uncompress (
                 &dwaa,
-                compressed_data,
+                (const uint8_t*) compressed_data,
                 comp_buf_size,
                 uncompressed_data,
                 uncompressed_size);

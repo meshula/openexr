@@ -99,7 +99,7 @@ Classifier_read (Classifier* out, const uint8_t** ptr, uint64_t* size)
         len += 1;
         if (len == 128 + 1) return EXR_ERR_CORRUPT_CHUNK;
 
-        mem = internal_exr_alloc (len);
+        mem = (char*) internal_exr_alloc (len);
         if (!mem) return EXR_ERR_OUT_OF_MEMORY;
 
         memcpy (mem, suffix, len);

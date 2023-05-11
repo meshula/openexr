@@ -297,7 +297,8 @@ undo_zip_impl (
     {
         if (actual_out_bytes == uncompressed_size)
         {
-            internal_zip_reconstruct_bytes (uncompressed_data, scratch_data, actual_out_bytes);
+            internal_zip_reconstruct_bytes ((uint8_t*) uncompressed_data,
+                                            (uint8_t*) scratch_data, actual_out_bytes);
         }
         else
             res = EXR_ERR_CORRUPT_CHUNK;
@@ -352,8 +353,8 @@ apply_zip_impl (exr_encode_pipeline_t* encode)
     if (rv != EXR_ERR_SUCCESS) return rv;
 
     internal_zip_deconstruct_bytes (
-        encode->scratch_buffer_1,
-        encode->packed_buffer,
+        (uint8_t*) encode->scratch_buffer_1,
+        (const uint8_t*) encode->packed_buffer,
         encode->packed_bytes);
 
     rv = exr_compress_buffer (
@@ -383,7 +384,7 @@ apply_zip_impl (exr_encode_pipeline_t* encode)
             pctxt->print_error (
                 pctxt,
                 rv,
-                "Unable to compress buffer %lu -> %lu @ level %d",
+                "Unable to compress buffer %llu -> %lu @ level %d",
                 encode->packed_bytes, encode->compressed_alloc_size, level);
     }
     
@@ -408,7 +409,7 @@ internal_exr_apply_zip (exr_encode_pipeline_t* encode)
             pctxt->print_error (
                 pctxt,
                 rv,
-                "Unable to allocate scratch buffer for deflate of %lu bytes",
+                "Unable to allocate scratch buffer for deflate of %llu bytes",
                 encode->packed_bytes);
         return rv;
     }

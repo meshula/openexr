@@ -133,7 +133,7 @@ dispatch_print_error (
         va_end (stkargs);
         if (nwrit >= 256)
         {
-            heapbuf = pctxt->alloc_fn ((size_t) (nwrit + 1));
+            heapbuf = (char*) pctxt->alloc_fn ((size_t) (nwrit + 1));
             if (heapbuf)
             {
                 (void) vsnprintf (heapbuf, (size_t) (nwrit + 1), msg, fmtargs);
@@ -224,19 +224,17 @@ internal_exr_add_part (
     }
     else
     {
-        struct _internal_exr_part nil = {0};
-
-        part = f->alloc_fn (sizeof (struct _internal_exr_part));
+        part = (struct _internal_exr_part*) f->alloc_fn (sizeof (struct _internal_exr_part));
         if (!part) return f->standard_error (f, EXR_ERR_OUT_OF_MEMORY);
 
-        nptrs =
+        nptrs = (struct _internal_exr_part**)
             f->alloc_fn (sizeof (struct _internal_exr_part*) * (size_t) ncount);
         if (!nptrs)
         {
             f->free_fn (part);
             return f->standard_error (f, EXR_ERR_OUT_OF_MEMORY);
         }
-        *part = nil;
+        memset(part, 0, sizeof(struct _internal_exr_part));
     }
 
     /* assign appropriately invalid values */
@@ -291,7 +289,9 @@ internal_exr_revert_add_part (
     }
     else if (ncount == 1)
     {
-        if (part == &(ctxt->first_part)) ctxt->first_part = *(ctxt->parts[1]);
+        if (part == &(ctxt->first_part)) {
+            memcpy(&ctxt->first_part, ctxt->parts[1], sizeof(struct _internal_exr_part));
+        }
         ctxt->init_part = &(ctxt->first_part);
         ctxt->free_fn (ctxt->parts);
         ctxt->parts = &(ctxt->init_part);
@@ -348,7 +348,7 @@ internal_exr_alloc_context (
     {
         memset (memptr, 0, sizeof (struct _internal_exr_context));
 
-        ret       = memptr;
+        ret       = (struct _internal_exr_context*) memptr;
         ret->mode = (uint8_t) mode;
         /* stash this separately so when a user queries they don't see
          * any of our internal hijinx */

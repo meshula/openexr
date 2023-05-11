@@ -236,7 +236,7 @@ LossyDctDecoder_execute (LossyDctDecoder* d)
     // 8x8 half-float blocks
     //
 
-    uint8_t* rowBlockHandle = internal_exr_alloc (
+    uint8_t* rowBlockHandle = (uint8_t*) internal_exr_alloc (
         numComp * numBlocksX * 64 * sizeof (uint16_t) + _SSE_ALIGNMENT);
     if (!rowBlockHandle) return EXR_ERR_OUT_OF_MEMORY;
 

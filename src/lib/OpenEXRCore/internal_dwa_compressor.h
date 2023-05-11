@@ -106,7 +106,7 @@ DwaCompressor_construct (
 
     if (encode)
     {
-        me->_channelData =
+        me->_channelData = (ChannelData*)
             internal_exr_alloc (sizeof (ChannelData) * encode->channel_count);
         if (!me->_channelData) return EXR_ERR_OUT_OF_MEMORY;
 
@@ -119,8 +119,8 @@ DwaCompressor_construct (
             me->_channelData[c].chan        = encode->channels + c;
             me->_channelData[c].compression = UNKNOWN;
             DctCoderChannelData_construct (
-                &(me->_channelData[c]._dctData),
-                me->_channelData[c].chan->data_type);
+                (DctCoderChannelData*) &(me->_channelData[c]._dctData),
+                (exr_pixel_type_t) me->_channelData[c].chan->data_type);
         }
 
         // DWAA should be 32, DWAB should be 256
@@ -140,7 +140,7 @@ DwaCompressor_construct (
     }
     else
     {
-        me->_channelData =
+        me->_channelData = (ChannelData*)
             internal_exr_alloc (sizeof (ChannelData) * decode->channel_count);
         if (!me->_channelData) return EXR_ERR_OUT_OF_MEMORY;
 
@@ -224,7 +224,9 @@ DwaCompressor_compress (DwaCompressor* me)
             sizeof (sDefaultChannelRules) / sizeof (Classifier);
     }
 
-    rv = DwaCompressor_initializeBuffers (me, &outBufferSize);
+    size_t readHere = 0;
+    rv = DwaCompressor_initializeBuffers (me, &readHere);
+    outBufferSize = readHere;
 
     nAvail = me->_encode->compressed_alloc_size;
     if (nAvail < (NUM_SIZES_SINGLE * sizeof (uint64_t)))
@@ -280,7 +282,6 @@ DwaCompressor_compress (DwaCompressor* me)
     if (rv != EXR_ERR_SUCCESS || nWritten >= me->_encode->compressed_alloc_size)
         return EXR_ERR_OUT_OF_MEMORY;
 
-    uint8_t* outDataStart = outPtr;
     uint8_t* outDataPtr   = outPtr;
 
     //
@@ -311,7 +312,7 @@ DwaCompressor_compress (DwaCompressor* me)
         me->_channelData[c].processed = 0;
     }
 
-    uint8_t* inDataPtr = me->_encode->packed_buffer;
+    uint8_t* inDataPtr = (uint8_t*) me->_encode->packed_buffer;
 
     for (int y = me->_min[1]; y <= me->_max[1]; ++y)
     {
@@ -591,7 +592,8 @@ DwaCompressor_compress (DwaCompressor* me)
         if (rv != EXR_ERR_SUCCESS) return rv;
 
         internal_zip_deconstruct_bytes (
-            me->_encode->scratch_buffer_1, me->_packedDcBuffer, uncompBytes);
+            (uint8_t*) me->_encode->scratch_buffer_1,
+            (const uint8_t*) me->_packedDcBuffer, uncompBytes);
 
         rv = exr_compress_buffer (
             me->_zipLevel,
@@ -761,7 +763,7 @@ DwaCompressor_uncompress (
 
     // the C++ classes used to have one buffer size for compress / uncompress
     // but here we want to do zero-ish copy...
-    uint8_t* outBufferEnd = me->_decode->unpacked_buffer;
+    uint8_t* outBufferEnd = (uint8_t*) me->_decode->unpacked_buffer;
     //if (outBufferSize > me->_decode->unpacked_alloc_size)
     //{
     //    printf( "outbuffersize %lu larger than unpacked size %lu\n", outBufferSize, me->_decode->unpacked_alloc_size );
@@ -940,7 +942,7 @@ DwaCompressor_uncompress (
         }
 
         internal_zip_reconstruct_bytes (
-            me->_packedDcBuffer, me->_decode->scratch_buffer_1, uncompBytes);
+            me->_packedDcBuffer, (uint8_t*) me->_decode->scratch_buffer_1, uncompBytes);
     }
     else
     {
@@ -1366,7 +1368,7 @@ DwaCompressor_initializeBuffers (DwaCompressor* me, size_t* bufferSize)
         me->_packedAcBufferSize = maxLossyDctAcSize * numLossyDctChans;
         if (me->_packedAcBuffer != NULL)
             internal_exr_free (me->_packedAcBuffer);
-        me->_packedAcBuffer = internal_exr_alloc (me->_packedAcBufferSize);
+        me->_packedAcBuffer = (uint8_t*) internal_exr_alloc (me->_packedAcBufferSize);
         if (!me->_packedAcBuffer) return EXR_ERR_OUT_OF_MEMORY;
         memset (me->_packedAcBuffer, 0, me->_packedAcBufferSize);
     }
@@ -1380,7 +1382,7 @@ DwaCompressor_initializeBuffers (DwaCompressor* me, size_t* bufferSize)
         me->_packedDcBufferSize = maxLossyDctDcSize * numLossyDctChans;
         if (me->_packedDcBuffer != NULL)
             internal_exr_free (me->_packedDcBuffer);
-        me->_packedDcBuffer = internal_exr_alloc (me->_packedDcBufferSize);
+        me->_packedDcBuffer = (uint8_t*) internal_exr_alloc (me->_packedDcBufferSize);
         if (!me->_packedDcBuffer) return EXR_ERR_OUT_OF_MEMORY;
         memset (me->_packedDcBuffer, 0, me->_packedDcBufferSize);
     }
@@ -1389,7 +1391,7 @@ DwaCompressor_initializeBuffers (DwaCompressor* me, size_t* bufferSize)
     {
         me->_rleBufferSize = rleBufferSize;
         if (me->_rleBuffer != 0) internal_exr_free (me->_rleBuffer);
-        me->_rleBuffer = internal_exr_alloc (rleBufferSize);
+        me->_rleBuffer = (uint8_t*) internal_exr_alloc (rleBufferSize);
         if (!me->_rleBuffer) return EXR_ERR_OUT_OF_MEMORY;
         memset (me->_rleBuffer, 0, rleBufferSize);
     }
@@ -1430,7 +1432,7 @@ DwaCompressor_initializeBuffers (DwaCompressor* me, size_t* bufferSize)
                 //throw IEX_NAMESPACE::ArgExc ("DWA buffers too large");
             }
 
-            me->_planarUncBuffer[i] =
+            me->_planarUncBuffer[i] = (uint8_t*)
                 internal_exr_alloc (planarUncBufferSize[i]);
             if (!me->_planarUncBuffer[i]) return EXR_ERR_OUT_OF_MEMORY;
         }
@@ -1454,7 +1456,7 @@ DwaCompressor_writeRelevantChannelRules (
 
     if (nAvail < (*nWritten + nOut)) return EXR_ERR_OUT_OF_MEMORY;
 
-    int outcount = 0;
+    //int outcount = 0;
     for (size_t i = 0; i < me->_channelRuleCount; ++i)
     {
         for (size_t c = 0; c < me->_numChannels; ++c)
@@ -1472,7 +1474,7 @@ DwaCompressor_writeRelevantChannelRules (
                     return EXR_ERR_OUT_OF_MEMORY;
 
                 nOut += Classifier_write (&(me->_channelRules[i]), &curp);
-                ++outcount;
+                //++outcount;
                 break;
             }
         }
@@ -1532,7 +1534,9 @@ DwaCompressor_readChannelRules (
         {
             Classifier tmpc;
             memset (&tmpc, 0, sizeof (Classifier));
-            rv = Classifier_read (&tmpc, &tmpPtr, &dataSize);
+            uint64_t readHere = 0;
+            rv = Classifier_read (&tmpc, &tmpPtr, &readHere);
+            dataSize = readHere;
             Classifier_destroy (&tmpc);
             ++nRules;
         }
@@ -1541,7 +1545,7 @@ DwaCompressor_readChannelRules (
         if (rv == EXR_ERR_SUCCESS)
         {
             me->_channelRuleCount = nRules;
-            me->_channelRules =
+            me->_channelRules = (Classifier*)
                 internal_exr_alloc (sizeof (Classifier) * nRules);
 
             dataSize = ruleSize;
@@ -1550,8 +1554,10 @@ DwaCompressor_readChannelRules (
                 memset (me->_channelRules, 0, sizeof (Classifier) * nRules);
                 for (size_t i = 0; i < nRules; ++i)
                 {
+                    uint64_t readHere = 0;
                     Classifier_read (
-                        &(me->_channelRules[i]), &readPtr, &dataSize);
+                        &(me->_channelRules[i]), &readPtr, &readHere);
+                    dataSize = readHere;
                 }
             }
             else
@@ -1573,7 +1579,7 @@ DwaCompressor_classifyChannels (DwaCompressor* me)
     // potential CSC-able sets of channels.
     //
 
-    me->_cscChannelSets =
+    me->_cscChannelSets = (CscChannelSet*)
         internal_exr_alloc (sizeof (CscChannelSet) * me->_numChannels);
     if (!me->_cscChannelSets) return EXR_ERR_OUT_OF_MEMORY;
 
@@ -1581,7 +1587,7 @@ DwaCompressor_classifyChannels (DwaCompressor* me)
     // Try and figure out which channels should be
     // compressed by which means.
     //
-    CscPrefixMapItem* prefixMap =
+    CscPrefixMapItem* prefixMap = (CscPrefixMapItem*)
         internal_exr_alloc (sizeof (CscPrefixMapItem) * me->_numChannels);
     if (!prefixMap) return EXR_ERR_OUT_OF_MEMORY;
 
@@ -1606,7 +1612,7 @@ DwaCompressor_classifyChannels (DwaCompressor* me)
                 me->_channelData[c].compression = me->_channelRules[i]._scheme;
 
                 if (me->_channelRules[i]._cscIdx >= 0)
-                    mapi->idx[me->_channelRules[i]._cscIdx] = c;
+                    mapi->idx[me->_channelRules[i]._cscIdx] = (int) c;
             }
         }
     }
