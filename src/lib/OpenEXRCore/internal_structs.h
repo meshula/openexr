@@ -310,6 +310,7 @@ internal_exr_unlock (const struct _internal_exr_context* c)
                 pi));                                                          \
     part = pctxt->parts[pi]
 
+// the extra assignment suppresses an unused variable warning
 #define EXR_PROMOTE_CONST_CONTEXT_AND_PART_OR_ERROR_NO_LOCK(c, pi)             \
     const struct _internal_exr_context* pctxt = EXR_CCTXT (c);                 \
     const struct _internal_exr_part*    part;                                  \
@@ -322,8 +323,10 @@ internal_exr_unlock (const struct _internal_exr_context* c)
                 EXR_ERR_ARGUMENT_OUT_OF_RANGE,                                 \
                 "Part index (%d) out of range",                                \
                 pi));                                                          \
-    part = pctxt->parts[pi]
+    part = pctxt->parts[pi];                                                   \
+    part = part
 
+// the extra assignment suppresses an unused variable warning
 #define EXR_PROMOTE_READ_CONST_CONTEXT_AND_PART_OR_ERROR(c, pi)                \
     const struct _internal_exr_context* pctxt = EXR_CCTXT (c);                 \
     const struct _internal_exr_part*    part;                                  \
@@ -336,7 +339,8 @@ internal_exr_unlock (const struct _internal_exr_context* c)
             EXR_ERR_ARGUMENT_OUT_OF_RANGE,                                     \
             "Part index (%d) out of range",                                    \
             pi);                                                               \
-    part = pctxt->parts[pi]
+    part = pctxt->parts[pi];                                                   \
+    part = part
 
 void internal_exr_update_default_handlers (exr_context_initializer_t* inits);
 
