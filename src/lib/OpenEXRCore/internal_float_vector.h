@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /** 
  * @addtogroup InternalAttributeFunctions
  * @{
@@ -44,6 +46,8 @@ exr_result_t
 exr_attr_float_vector_destroy (exr_context_t ctxt, exr_attr_float_vector_t* fv);
 
 /** @} */
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #ifdef __cplusplus
 } /* extern "C" */

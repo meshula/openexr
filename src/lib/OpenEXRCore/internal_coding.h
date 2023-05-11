@@ -23,6 +23,8 @@
 extern "C" {
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 typedef exr_result_t (*internal_exr_unpack_fn) (exr_decode_pipeline_t*);
 
 internal_exr_unpack_fn internal_exr_match_decode (
@@ -275,6 +277,8 @@ uint_to_float_int (uint32_t ui)
     v.f = uint_to_float (ui);
     return v.i;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #ifdef __cplusplus
 } /* extern "C" */

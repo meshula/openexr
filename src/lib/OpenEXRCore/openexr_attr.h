@@ -7,6 +7,7 @@
 #define OPENEXR_ATTR_H
 
 #include "openexr_context.h"
+#include "openexr_version.h"
 
 #include <stddef.h>
 #include <stdint.h>
@@ -14,6 +15,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+OPENEXR_NAMESPACE_OPEN_SCOPE
 
 /** @file */
 
@@ -526,6 +529,8 @@ typedef struct
         uint8_t*                   rawptr;
     };
 } exr_attribute_t;
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 /** @} */
 

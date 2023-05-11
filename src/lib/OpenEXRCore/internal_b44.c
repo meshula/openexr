@@ -11,6 +11,8 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 extern const uint16_t* exrcore_expTable;
@@ -683,3 +685,5 @@ internal_exr_undo_b44a (
         uncompressed_data,
         uncompressed_size);
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

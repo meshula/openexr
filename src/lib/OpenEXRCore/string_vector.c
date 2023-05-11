@@ -9,6 +9,8 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 exr_result_t
@@ -242,3 +244,5 @@ exr_attr_string_vector_add_entry (
     if (s) len = (int32_t) strlen (s);
     return exr_attr_string_vector_add_entry_with_length (ctxt, sv, s, len);
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

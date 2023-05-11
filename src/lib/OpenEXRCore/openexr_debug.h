@@ -11,6 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+OPENEXR_NAMESPACE_OPEN_SCOPE
 
 /** @file */
 
@@ -20,6 +21,7 @@ extern "C" {
 EXR_EXPORT exr_result_t
 exr_print_context_info (exr_const_context_t c, int verbose);
 
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

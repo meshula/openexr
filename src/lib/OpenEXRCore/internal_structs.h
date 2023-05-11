@@ -57,6 +57,8 @@ typedef uint64_t atomic_uintptr_t;
 #    endif
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 struct _internal_exr_part
 {
     int part_index;
@@ -357,5 +359,7 @@ exr_result_t internal_exr_alloc_context (
     enum _INTERNAL_EXR_CONTEXT_MODE  mode,
     size_t                           extra_data);
 void internal_exr_destroy_context (struct _internal_exr_context* ctxt);
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #endif /* OPENEXR_PRIVATE_STRUCTS_H */

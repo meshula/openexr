@@ -23,6 +23,8 @@
 
 /**************************************/
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 static void
 default_error_handler (
     exr_const_context_t ctxt, exr_result_t code, const char* msg)
@@ -502,3 +504,5 @@ internal_exr_update_default_handlers (exr_context_initializer_t* inits)
     if (!inits->alloc_fn) inits->alloc_fn = &internal_exr_alloc;
     if (!inits->free_fn) inits->free_fn = &internal_exr_free;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

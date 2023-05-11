@@ -10,6 +10,8 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 exr_result_t
@@ -248,3 +250,5 @@ exr_attr_string_destroy (exr_context_t ctxt, exr_attr_string_t* s)
     }
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

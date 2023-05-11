@@ -14,6 +14,8 @@
 #define MIN_RUN_LENGTH 3
 #define MAX_RUN_LENGTH 127
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 uint64_t
 internal_rle_compress (
     void* out, uint64_t outbytes, const void* src, uint64_t srcbytes)
@@ -215,3 +217,5 @@ internal_exr_undo_rle (
     unpredict_and_reorder (out, decode->scratch_buffer_1, outsz);
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

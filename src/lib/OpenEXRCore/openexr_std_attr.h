@@ -11,6 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+OPENEXR_NAMESPACE_OPEN_SCOPE
 
 /** @file */
 
@@ -55,6 +56,7 @@ dwaCompressionLevel
 
 /** @} */
 
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

@@ -13,6 +13,8 @@
 #    define EXR_DCT_ALIGN _Alignas (_SSE_ALIGNMENT)
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 typedef struct _DctCoderChannelData
@@ -131,3 +133,5 @@ CscPrefixMap_find (
 
     return mapl + idx;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

@@ -20,6 +20,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 #if defined __USE_UNIX98 || defined __USE_XOPEN2K8 ||                          \
     (defined(_XOPEN_VERSION) && _XOPEN_VERSION >= 400)
 #    define CAN_USE_PREAD 1
@@ -475,3 +477,5 @@ make_temp_filename (struct _internal_exr_context* ret)
             newlen + 1);
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

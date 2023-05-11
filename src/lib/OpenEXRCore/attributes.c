@@ -14,6 +14,8 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-braces"
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 struct _internal_exr_attr_map
 {
     const char*          name;
@@ -1135,5 +1137,7 @@ exr_attr_list_remove (
 
     return attr_destroy (pctxt, attr);
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #pragma clang diagnostic pop

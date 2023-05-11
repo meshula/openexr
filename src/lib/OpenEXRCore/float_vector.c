@@ -9,6 +9,8 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 /* allocates ram, but does not fill any data */
@@ -131,3 +133,5 @@ exr_attr_float_vector_destroy (exr_context_t ctxt, exr_attr_float_vector_t* fv)
     }
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

@@ -4,7 +4,6 @@
 //
 // This is the OpenEXR library version information.
 // ImfVersion.h contains version information about the file format.
-#pragma once
 #ifndef INCLUDED_OPENEXR_VERSION_H
 #define INCLUDED_OPENEXR_VERSION_H
 
@@ -13,4 +12,3 @@
 #define OPENEXR_VERSION_PATCH 0
 
 #endif
-

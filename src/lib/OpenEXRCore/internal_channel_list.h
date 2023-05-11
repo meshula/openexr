@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /** 
  * @addtogroup InternalAttributeFunctions
  * @{
@@ -47,6 +49,8 @@ exr_result_t exr_attr_chlist_duplicate (
 
 /** @brief Frees memory for the channel list and all channels inside */
 exr_result_t exr_attr_chlist_destroy (exr_context_t ctxt, exr_attr_chlist_t*);
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 /** @} */
 

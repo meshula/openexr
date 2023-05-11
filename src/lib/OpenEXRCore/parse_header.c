@@ -21,6 +21,8 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-braces"
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 static exr_result_t
@@ -2683,5 +2685,7 @@ internal_exr_parse_header (struct _internal_exr_context* ctxt)
     priv_destroy_scratch (&scratch);
     return internal_exr_context_restore_handlers (ctxt, rv);
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #pragma clang diagnostic pop

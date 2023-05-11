@@ -10,6 +10,7 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
 /**************************************/
 
 int
@@ -314,3 +315,5 @@ exr_attr_opaquedata_set_packed (
 
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 static exr_result_t
@@ -736,3 +738,5 @@ exr_decoding_destroy (exr_const_context_t ctxt, exr_decode_pipeline_t* decode)
     }
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

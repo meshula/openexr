@@ -7,6 +7,8 @@
 #    error "only include internal_dwa_helpers.h"
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 typedef struct _DwaCompressor
@@ -1712,3 +1714,5 @@ DwaCompressor_setupChannelData (DwaCompressor* me)
 
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

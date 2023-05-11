@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /** 
  * @addtogroup InternalAttributeFunctions
  * @{
@@ -79,6 +81,8 @@ exr_result_t exr_attr_string_vector_add_entry (
     exr_context_t ctxt, exr_attr_string_vector_t* sv, const char* s);
 
 /** @} */
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #ifdef __cplusplus
 } /* extern "C" */

@@ -22,6 +22,8 @@
 #    include "internal_posix_file_impl.h"
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 static exr_result_t
@@ -697,3 +699,5 @@ exr_write_header (exr_context_t ctxt)
 
     return EXR_UNLOCK_AND_RETURN_PCTXT (rv);
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

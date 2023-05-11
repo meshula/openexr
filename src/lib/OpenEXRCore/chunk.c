@@ -29,6 +29,8 @@ atomic_compare_exchange_strong (
 }
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 static exr_result_t extract_chunk_table (
@@ -2181,3 +2183,5 @@ internal_validate_next_chunk (
     }
     return rv;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

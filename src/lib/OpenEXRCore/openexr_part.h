@@ -14,6 +14,8 @@
 extern "C" {
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /** @file */
 
 /** 
@@ -806,6 +808,8 @@ EXR_EXPORT exr_result_t exr_attr_set_user (
 /** @} */ /* metadata group */
 
 /** @} */ /* part group */
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #ifdef __cplusplus
 } /* extern "C" */

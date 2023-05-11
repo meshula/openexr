@@ -17,6 +17,8 @@
 #define USHORT_RANGE (1 << 16)
 #define BITMAP_SIZE (USHORT_RANGE >> 3)
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 static void
 bitmapFromData (
     const uint16_t* data,
@@ -708,3 +710,5 @@ internal_exr_undo_piz (
     if (nOut != outsz) return EXR_ERR_CORRUPT_CHUNK;
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

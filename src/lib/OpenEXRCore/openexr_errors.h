@@ -13,6 +13,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+OPENEXR_NAMESPACE_OPEN_SCOPE
 
 /** @file */
 
@@ -82,6 +83,7 @@ EXR_EXPORT const char* exr_get_error_code_as_string (exr_result_t code);
 
 /** @} */
 
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

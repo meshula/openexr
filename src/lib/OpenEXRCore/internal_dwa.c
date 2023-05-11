@@ -118,6 +118,8 @@
 
 #include "internal_dwa_helpers.h"
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 exr_result_t
@@ -234,3 +236,5 @@ internal_exr_undo_dwab (
 
     return rv;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

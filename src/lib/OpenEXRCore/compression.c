@@ -11,6 +11,8 @@
 /* value Aras found to be better trade off of speed vs size */
 #define EXR_DEFAULT_ZLIB_COMPRESS_LEVEL 4
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 size_t exr_compress_max_buffer_size (size_t in_bytes)
@@ -125,3 +127,4 @@ exr_result_t exr_uncompress_buffer (
     return EXR_ERR_OUT_OF_MEMORY;
 }
 
+OPENEXR_NAMESPACE_CLOSE_SCOPE

@@ -74,6 +74,8 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 static inline uint64_t
 one_to_native64 (uint64_t v)
 {
@@ -276,4 +278,5 @@ unaligned_load32 (const void* src)
     return one_to_native32 (tmp);
 }
 
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 #endif /* OPENEXR_PRIVATE_XDR_H */

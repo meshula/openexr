@@ -15,6 +15,8 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-braces"
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 static exr_result_t
 validate_req_attr (
     struct _internal_exr_context* f,
@@ -638,4 +640,5 @@ internal_exr_validate_write_part (
     return EXR_ERR_SUCCESS;
 }
 
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 #pragma clang diagnostic pop

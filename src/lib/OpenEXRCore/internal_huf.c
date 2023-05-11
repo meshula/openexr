@@ -26,6 +26,8 @@
 #define SHORTEST_LONG_RUN (2 + LONG_ZEROCODE_RUN - SHORT_ZEROCODE_RUN)
 #define LONGEST_LONG_RUN (255 + SHORTEST_LONG_RUN)
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 typedef struct _HufDec
 {
     int32_t   len;
@@ -1879,3 +1881,5 @@ internal_huf_decompress (
     }
     return rv;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

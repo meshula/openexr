@@ -11,6 +11,8 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 #ifndef __F16C__
@@ -1388,3 +1390,5 @@ internal_exr_match_decode (
 
     return &generic_unpack;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

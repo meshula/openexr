@@ -6,6 +6,7 @@
 #ifndef OPENEXR_BACKWARD_COMPATIBILITY_H
 #define OPENEXR_BACKWARD_COMPATIBILITY_H
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
 struct _exr_context_initializer_v1
 {
     size_t                        size;
@@ -41,5 +42,7 @@ struct _exr_context_initializer_v2
     int                           zip_level;
     float                         dwa_quality;
 };
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #endif /* OPENEXR_BACKWARD_COMPATIBILITY_H */

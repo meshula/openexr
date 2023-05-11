@@ -8,6 +8,8 @@
 
 #include "openexr_encode.h"
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 uint64_t internal_rle_compress (
     void* out, uint64_t outbytes, const void* src, uint64_t srcbytes);
 
@@ -33,5 +35,7 @@ exr_result_t internal_exr_apply_b44a (exr_encode_pipeline_t* encode);
 exr_result_t internal_exr_apply_dwaa (exr_encode_pipeline_t* encode);
 
 exr_result_t internal_exr_apply_dwab (exr_encode_pipeline_t* encode);
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #endif /* OPENEXR_CORE_COMPRESS_H */

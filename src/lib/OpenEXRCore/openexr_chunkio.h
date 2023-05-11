@@ -14,6 +14,8 @@
 extern "C" {
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /** @file */
 
 /**
@@ -163,6 +165,8 @@ exr_result_t exr_write_deep_tile_chunk (
     uint64_t      unpacked_size,
     const void*   sample_data,
     uint64_t      sample_data_size);
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
 
 #ifdef __cplusplus
 } /* extern "C" */

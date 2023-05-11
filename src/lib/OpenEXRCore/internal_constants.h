@@ -28,4 +28,6 @@
 #define EXR_SHORTNAME_MAXLEN 31
 #define EXR_LONGNAME_MAXLEN 255
 
+#include "openexr_version.h"
+
 #endif /* OPENEXR_PRIV_CONSTANTS_H */

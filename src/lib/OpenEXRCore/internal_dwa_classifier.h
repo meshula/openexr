@@ -7,6 +7,8 @@
 #    error "only include internal_dwa_helpers.h"
 #endif
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 typedef struct _Classifier
@@ -202,3 +204,5 @@ Classifier_find_suffix (const char* channel_name)
     else { suffix = channel_name; }
     return suffix;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

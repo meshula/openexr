@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 /**************************************/
 
 exr_result_t
@@ -2356,3 +2358,5 @@ exr_attr_set_user (
         rv = exr_attr_opaquedata_set_packed (ctxt, attr->opaque, out, size);
     return EXR_UNLOCK_AND_RETURN_PCTXT (rv);
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

@@ -8,6 +8,8 @@
 
 #include <string.h>
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 exr_result_t
 internal_coding_fill_channel_info (
     exr_coding_channel_info_t**         channels,
@@ -278,3 +280,5 @@ internal_decode_alloc_buffer (
     }
     return EXR_ERR_SUCCESS;
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE

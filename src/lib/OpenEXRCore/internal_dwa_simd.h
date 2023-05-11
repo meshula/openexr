@@ -50,6 +50,8 @@
 #define _SSE_ALIGNMENT_MASK 0x0F
 #define _AVX_ALIGNMENT_MASK 0x1F
 
+OPENEXR_NAMESPACE_OPEN_SCOPE
+
 //
 // Color space conversion, Inverse 709 CSC, Y'CbCr -> R'G'B'
 //
@@ -2343,3 +2345,5 @@ initializeFuncs ()
     }
 #endif
 }
+
+OPENEXR_NAMESPACE_CLOSE_SCOPE
