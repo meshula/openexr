@@ -1110,7 +1110,7 @@ exr_set_chunk_count (exr_context_t ctxt, int part_index, int32_t val)
     if (!out)                                                                  \
         return EXR_UNLOCK_WRITE_AND_RETURN_PCTXT (pctxt->print_error (         \
             pctxt, EXR_ERR_INVALID_ARGUMENT, "NULL output for '%s'", name));   \
-    *out = attr->entry;                                                        \
+    *out = EXR_DECLTYPE(*out) attr->entry;                                     \
     return EXR_UNLOCK_WRITE_AND_RETURN_PCTXT (rv)
 
 #define ATTR_GET_IMPL_DEREF(t, entry)                                          \
@@ -1293,7 +1293,7 @@ exr_attr_set_channels (
                 cur->name.str,
                 cur->name.length,
                 cur->pixel_type,
-                cur->p_linear,
+                (exr_perceptual_treatment_t) cur->p_linear,
                 cur->x_sampling,
                 cur->y_sampling);
             if (rv != EXR_ERR_SUCCESS)
@@ -1609,7 +1609,7 @@ exr_attr_set_lineorder (
             (int) EXR_LINEORDER_LAST_TYPE);
 
     if (name && 0 == strcmp (name, EXR_REQ_LO_STR))
-        return exr_set_lineorder (ctxt, part_index, val);
+        return exr_set_lineorder (ctxt, part_index, lval);
 
     ATTR_SET_IMPL (EXR_ATTR_LINEORDER, uc);
 }
