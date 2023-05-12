@@ -14,7 +14,7 @@
 #include <string.h>
 
 
-#if defined(_MSC_VER) && not defined(__cplusplus)
+#if defined(_MSC_VER) && !defined(__cplusplus)
 /* msvc w/ c11 support is only very new, until we know what the preprocessor checks are, provide defaults */
 #    include <windows.h>
 static inline int
