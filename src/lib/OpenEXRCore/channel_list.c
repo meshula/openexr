@@ -10,9 +10,14 @@
 
 #include <string.h>
 
-// suppress missing braces warning when compiling as c++
+#ifdef __clang__
+// suppress missing braces when compiling as C++
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-braces"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmissing-braces"
+#endif
 
 /**************************************/
 
@@ -273,4 +278,10 @@ exr_attr_chlist_destroy (exr_context_t ctxt, exr_attr_chlist_t* clist)
 }
 
 OPENEXR_NAMESPACE_CLOSE_SCOPE
+
+#ifdef __clang__
 #pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
+
