@@ -330,8 +330,8 @@ extract_chunk_leader (
             return ctxt->print_error (
                 ctxt,
                 EXR_ERR_BAD_CHUNK_LEADER,
-                "Invalid chunk size reconstructing chunk table: found out of range %zu",
-                (size_t) leaderdata->deep_data[1]);
+                "Invalid chunk size reconstructing chunk table: found out of range %" PRId64,
+                leaderdata->deep_data[1]);
         }
         leaderdata->packed_size = leaderdata->deep_packed_size;
         nextoffset += leaderdata->deep_packed_size;
@@ -345,8 +345,8 @@ extract_chunk_leader (
             return ctxt->print_error (
                 ctxt,
                 EXR_ERR_BAD_CHUNK_LEADER,
-                "Invalid chunk size reconstructing chunk table: found out of range %zu",
-                (size_t) data[rdcnt]);
+                "Invalid chunk size reconstructing chunk table: found out of range %d",
+                data[rdcnt]);
         }
         leaderdata->packed_size = (uint64_t) data[rdcnt];
         nextoffset += leaderdata->packed_size;

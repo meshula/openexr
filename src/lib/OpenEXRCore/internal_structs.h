@@ -17,6 +17,10 @@
 #    endif
 #endif
 
+#ifndef __STDC_FORMAT_MACROS
+#    define __STDC_FORMAT_MACROS
+#endif
+
 #include <inttypes.h>
 
 #ifdef _MSC_VER
