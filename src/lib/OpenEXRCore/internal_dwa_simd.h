@@ -30,6 +30,7 @@
 
 #if defined(__ARM_NEON)
 #    define IMF_HAVE_NEON
+#    include <arm_neon.h>
 #endif
 
 #if defined(__aarch64__)

@@ -8,6 +8,7 @@
 // Do not edit.
 //
 
+#include "openexr_conf.h"
 #include <stdint.h>
 
 OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
