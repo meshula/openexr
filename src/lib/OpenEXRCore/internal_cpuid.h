@@ -12,7 +12,7 @@
 #    endif
 #endif
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 static inline void check_for_x86_simd (int *f16c, int *avx, int *sse2)
 {
@@ -90,6 +90,6 @@ static inline int has_native_half ()
 #endif
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 
 #endif // OPENEXR_CORE_INTERNAL_CPUID_H

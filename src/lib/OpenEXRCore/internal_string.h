@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /** 
  * @addtogroup InternalAttributeFunctions
@@ -71,7 +71,7 @@ exr_result_t exr_attr_string_destroy (exr_context_t ctxt, exr_attr_string_t* s);
 
 /** @} */
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 
 #ifdef __cplusplus
 } /* extern "C" */

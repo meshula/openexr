@@ -21,7 +21,7 @@
 #endif
 
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 static exr_result_t
 validate_req_attr (
@@ -646,7 +646,7 @@ internal_exr_validate_write_part (
     return EXR_ERR_SUCCESS;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 
 #ifdef __clang__
 #pragma clang diagnostic pop

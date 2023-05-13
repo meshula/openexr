@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 #if defined __USE_UNIX98 || defined __USE_XOPEN2K8 ||                          \
     (defined(_XOPEN_VERSION) && _XOPEN_VERSION >= 400)
@@ -478,4 +478,4 @@ make_temp_filename (struct _internal_exr_context* ret)
     return EXR_ERR_SUCCESS;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

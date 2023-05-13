@@ -8,7 +8,7 @@
 
 #include <string.h>
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 exr_result_t
 internal_coding_fill_channel_info (
@@ -281,4 +281,4 @@ internal_decode_alloc_buffer (
     return EXR_ERR_SUCCESS;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

@@ -31,7 +31,7 @@
 #endif
 
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 /**************************************/
 
 #ifdef IMF_HAVE_SSE4_1
@@ -418,4 +418,4 @@ internal_exr_apply_zip (exr_encode_pipeline_t* encode)
     return apply_zip_impl (encode);
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

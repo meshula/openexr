@@ -18,7 +18,7 @@
     (EXR_TILED_FLAG | EXR_LONG_NAMES_FLAG | EXR_NON_IMAGE_FLAG |               \
      EXR_MULTI_PART_FLAG)
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /* in openexr_parse_header.c, just checks the magic number and header */
 exr_result_t internal_exr_check_magic (struct _internal_exr_context* ctxt);
@@ -39,5 +39,5 @@ exr_result_t internal_exr_validate_read_part (
 exr_result_t internal_exr_validate_write_part (
     struct _internal_exr_context* ctxt, struct _internal_exr_part* curpart);
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 #endif /* OPENEXR_PRIVATE_FILE_UTIL_H */

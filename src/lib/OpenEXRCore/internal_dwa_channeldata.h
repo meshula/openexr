@@ -13,7 +13,7 @@
 #    define EXR_DCT_ALIGN _Alignas (_SSE_ALIGNMENT)
 #endif
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /**************************************/
 
@@ -134,4 +134,4 @@ CscPrefixMap_find (
     return mapl + idx;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

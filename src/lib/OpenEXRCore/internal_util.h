@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 static inline int
 compute_sampled_lines (int height, int y_sampling, int start_y)
@@ -44,5 +44,5 @@ compute_sampled_lines (int height, int y_sampling, int start_y)
     return nlines;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 #endif

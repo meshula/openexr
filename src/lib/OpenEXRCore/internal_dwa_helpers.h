@@ -9,7 +9,7 @@
 /* TODO: move to here when ready */
 #include "../OpenEXR/dwaLookups.h"
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /**************************************/
 
@@ -60,7 +60,7 @@ std_max (size_t a, size_t b)
     return a < b ? b : a;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 
 #include "internal_dwa_simd.h"
 #include "internal_dwa_channeldata.h"

@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /** @file */
 
@@ -196,7 +196,7 @@ EXR_EXPORT void exr_set_default_memory_routines (
 
 /** @} */
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 
 #ifdef __cplusplus
 } /* extern "C" */

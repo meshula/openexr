@@ -19,7 +19,7 @@
 #    endif
 #endif
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 static exr_result_t
 print_error_helper (
@@ -490,4 +490,4 @@ make_temp_filename (struct _internal_exr_context* ret)
     return EXR_ERR_SUCCESS;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

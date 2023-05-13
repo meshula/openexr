@@ -12,7 +12,7 @@
 #include <string.h>
 #include "openexr_compression.h"
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /**************************************/
 
@@ -422,4 +422,4 @@ internal_exr_undo_pxr24 (
         decode->scratch_alloc_size_1);
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

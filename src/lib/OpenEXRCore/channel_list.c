@@ -21,7 +21,7 @@
 
 /**************************************/
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 exr_result_t
 exr_attr_chlist_init (exr_context_t ctxt, exr_attr_chlist_t* clist, int nchans)
@@ -277,7 +277,7 @@ exr_attr_chlist_destroy (exr_context_t ctxt, exr_attr_chlist_t* clist)
     return EXR_ERR_SUCCESS;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 
 #ifdef __clang__
 #pragma clang diagnostic pop

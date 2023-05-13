@@ -20,7 +20,7 @@
 #endif
 
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 struct _internal_exr_attr_map
 {
@@ -1144,7 +1144,7 @@ exr_attr_list_remove (
     return attr_destroy (pctxt, attr);
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 
 #ifdef __clang__
 #pragma clang diagnostic pop

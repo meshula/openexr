@@ -7,7 +7,7 @@
 #    error "only include internal_dwa_helpers.h"
 #endif
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /**************************************/
 
@@ -205,4 +205,4 @@ Classifier_find_suffix (const char* channel_name)
     return suffix;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

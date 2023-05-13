@@ -29,10 +29,10 @@
 #    endif
 
 #else
-
 #    define EXR_EXPORT OPENEXR_EXPORT
-
 #endif
+
+/// @}
 
 /*
  * MSVC does have printf format checks, but it is not in the form of a
@@ -44,37 +44,17 @@
 #    define EXR_PRINTF_FUNC_ATTRIBUTE
 #endif
 
-#define OPENEXR_USE_NAMESPACES
 #if defined(__cplusplus) && defined(OPENEXR_USE_NAMESPACES)
-
-/// @TODO this should be using the OpenEXRConfig macro
-#define OPENEXR_EXTERNAL_NAMESPACE cexr
-#define OPENEXR_NS OPENEXR_EXTERNAL_NAMESPACE
-/// @TODO this should be using the OpenEXRConfig macro
-#define OPENXR_INTERNAL_NAMESPACE 2308
-#define OPENEXR_INTERNAL_NS exr_ ## OPENEXR_INTERNAL_NAMESPACE ## _reserved
-#define OPENEXR_NS_GLOBAL ::OPENEXR_NS
-
-namespace OPENEXR_INTERNAL_NS { }
-
-// The root level namespace for all source in OpenEXRCore
-namespace OPENEXR_NS {
-    using namespace OPENEXR_INTERNAL_NS;
-}
-
-#define OPENEXR_NAMESPACE_OPEN_SCOPE   namespace OPENEXR_INTERNAL_NS {
-#define OPENEXR_NAMESPACE_CLOSE_SCOPE  }  
-#define OPENEXR_NAMESPACE_USING_DIRECTIVE using namespace OPENEXR_NS;
-
+#    if !defined(OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER)
+#        if !defined(OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_ENTER)
+#            include "../OpenEXR/ImfNamespace.h"
+#        endif
+#        define OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_ENTER
+#        define OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_EXIT
+#    endif
 #else
-
-#define OPENEXR_NAMESPACE_OPEN_SCOPE   
-#define OPENEXR_NAMESPACE_CLOSE_SCOPE 
-#define OPENEXR_NAMESPACE_USING_DIRECTIVE
-
+#    define OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER   
+#    define OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT 
 #endif // PXR_USE_NAMESPACES
-
-
-/// @}
 
 #endif /* OPENEXR_CONF_H */

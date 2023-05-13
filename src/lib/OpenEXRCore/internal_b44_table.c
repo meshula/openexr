@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 extern const uint16_t* exrcore_expTable;
 extern const uint16_t* exrcore_logTable;
@@ -14587,4 +14587,4 @@ static const uint16_t exrcore_logTable_data[] = {
 };
 const uint16_t* exrcore_logTable = exrcore_logTable_data;
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

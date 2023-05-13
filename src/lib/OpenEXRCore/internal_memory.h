@@ -8,7 +8,7 @@
 
 #include "openexr_base.h"
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 #if defined(__GNUC__) || defined(__clang__)
 __attribute__ ((malloc))
@@ -18,5 +18,5 @@ internal_exr_alloc (size_t bytes);
 
 void internal_exr_free (void* ptr);
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 #endif /* OPENEXR_PRIVATE_MEMORY_H */

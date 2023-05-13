@@ -12,7 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 /** @file */
 
@@ -308,7 +308,7 @@ EXR_EXPORT
 exr_result_t
 exr_decoding_destroy (exr_const_context_t ctxt, exr_decode_pipeline_t* decode);
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
 #ifdef __cplusplus
 } /* extern "C" */
 #endif

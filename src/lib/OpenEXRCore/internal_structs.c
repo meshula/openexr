@@ -23,7 +23,7 @@
 
 /**************************************/
 
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 static void
 default_error_handler (
@@ -505,4 +505,4 @@ internal_exr_update_default_handlers (exr_context_initializer_t* inits)
     if (!inits->free_fn) inits->free_fn = &internal_exr_free;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT

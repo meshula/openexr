@@ -6,7 +6,7 @@
 #ifndef IMF_INTERNAL_DWA_HELPERS_H_HAS_BEEN_INCLUDED
 #    error "only include internal_dwa_helpers.h"
 #endif
-OPENEXR_NAMESPACE_OPEN_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 //
 // Base 'class' for encoding using the lossy DCT scheme
@@ -608,4 +608,4 @@ LossyDctEncoder_rleAc (LossyDctEncoder* e, uint16_t* block, uint16_t** acPtr)
     *acPtr = curAC;
 }
 
-OPENEXR_NAMESPACE_CLOSE_SCOPE
+OPENEXR_CORE_INTERNAL_NAMESPACE_SOURCE_EXIT
