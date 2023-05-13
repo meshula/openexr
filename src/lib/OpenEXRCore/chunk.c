@@ -517,8 +517,14 @@ extract_chunk_table (
 
     *chunkminoffset = chunkoff + chunkbytes;
 
+#if defined(_MSC_VER)
+    ctable = (uint64_t*) InterlockedOr64 (
+        (int64_t volatile*) &(part->chunk_table), 0);
+#else
     ctable = (uint64_t*) atomic_load (
         EXR_CONST_CAST (atomic_uintptr_t*, &(part->chunk_table)));
+#endif
+    
     if (ctable == NULL)
     {
         int64_t      nread = 0;
@@ -615,8 +621,14 @@ alloc_chunk_table (
     uint64_t* ctable = NULL;
 
     /* we have the lock, but to access the type, we'll use the atomic function anyway */
+#if defined(_MSC_VER)
+    ctable = (uint64_t*) InterlockedOr64 (
+        (int64_t volatile*) &(part->chunk_table), 0);
+#else
     ctable = (uint64_t*) atomic_load (
         EXR_CONST_CAST (atomic_uintptr_t*, &(part->chunk_table)));
+#endif
+
     if (ctable == NULL)
     {
         uint64_t  chunkbytes = sizeof (uint64_t) * (uint64_t) part->chunk_count;
