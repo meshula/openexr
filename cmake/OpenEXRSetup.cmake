@@ -36,11 +36,7 @@ set(IEX_INTERNAL_NAMESPACE "Iex_${OPENEXR_VERSION_API}" CACHE STRING "Real names
 set(IEX_NAMESPACE "Iex" CACHE STRING "Public namespace alias for Iex")
 
 # Whether to generate and install a pkg-config file OpenEXR.pc
-if (WIN32)
-option(OPENEXR_INSTALL_PKG_CONFIG "Install OpenEXR.pc file" OFF)
-else()
 option(OPENEXR_INSTALL_PKG_CONFIG "Install OpenEXR.pc file" ON)
-endif()
 
 # Whether to enable threading. This can be disabled, although thread pool and tasks
 # are still used, just processed immediately
@@ -167,6 +163,9 @@ if(NOT OPENEXR_FORCE_INTERNAL_DEFLATE)
   include(FindPkgConfig)
   pkg_check_modules(deflate IMPORTED_TARGET GLOBAL libdeflate)
   set(CMAKE_IGNORE_PATH)
+  if (deflate_FOUND)
+    message(STATUS "Using libdeflate from ${deflate_LINK_LIBRARIES}")
+  endif()
 endif()
 
 if(NOT TARGET PkgConfig::deflate AND NOT deflate_FOUND)
@@ -216,7 +215,13 @@ if(NOT TARGET PkgConfig::deflate AND NOT deflate_FOUND)
   set(EXR_DEFLATE_LIB)
 else()
   set(EXR_DEFLATE_INCLUDE_DIR)
-  set(EXR_DEFLATE_LIB PkgConfig::deflate)
+  set(EXR_DEFLATE_LIB ${deflate_LIBRARIES})
+  # set EXR_DEFATE_LDFLAGS for OpenEXR.pc.in for static build
+  if (BUILD_SHARED_LIBS)
+    set(EXR_DEFLATE_LDFLAGS "")
+  else()
+    set(EXR_DEFLATE_LDFLAGS "-l${deflate_LIBRARIES}")
+  endif()
   set(EXR_DEFLATE_SOURCES)
 endif()
 
@@ -226,9 +231,9 @@ endif()
 
 option(OPENEXR_FORCE_INTERNAL_IMATH "Force using an internal imath" OFF)
 # Check to see if Imath is installed outside of the current build directory.
-set(IMATH_REPO "https://github.com/AcademySoftwareFoundation/Imath.git" CACHE STRING
+set(OPENEXR_IMATH_REPO "https://github.com/AcademySoftwareFoundation/Imath.git" CACHE STRING
     "Repo for auto-build of Imath")
-set(IMATH_TAG "main" CACHE STRING
+set(OPENEXR_IMATH_TAG "main" CACHE STRING
   "Tag for auto-build of Imath (branch, tag, or SHA)")
 if(NOT OPENEXR_FORCE_INTERNAL_IMATH)
   #TODO: ^^ Release should not clone from main, this is a place holder
@@ -239,20 +244,25 @@ endif()
 
 if(NOT TARGET Imath::Imath AND NOT Imath_FOUND)
   if(OPENEXR_FORCE_INTERNAL_IMATH)
-    message(STATUS "Imath forced internal, installing from ${IMATH_REPO} (${IMATH_TAG})")
+    message(STATUS "Imath forced internal, installing from ${OPENEXR_IMATH_REPO} (${OPENEXR_IMATH_TAG})")
   else()
-    message(STATUS "Imath was not found, installing from ${IMATH_REPO} (${IMATH_TAG})")
+    message(STATUS "Imath was not found, installing from ${OPENEXR_IMATH_REPO} (${OPENEXR_IMATH_TAG})")
   endif()
   include(FetchContent)
   FetchContent_Declare(Imath
-    GIT_REPOSITORY "${IMATH_REPO}"
-    GIT_TAG "${IMATH_TAG}"
+    GIT_REPOSITORY "${OPENEXR_IMATH_REPO}"
+    GIT_TAG "${OPENEXR_IMATH_TAG}"
     GIT_SHALLOW ON
       )
     
   FetchContent_GetProperties(Imath)
   if(NOT Imath_POPULATED)
     FetchContent_Populate(Imath)
+
+    # Propagate OpenEXR's setting for pkg-config generation to Imath:
+    # If OpenEXR is generating it, the internal Imath should, too.
+    set(IMATH_INSTALL_PKG_CONFIG ${OPENEXR_INSTALL_PKG_CONFIG}) 
+
     # hrm, cmake makes Imath lowercase for the properties (to imath)
     add_subdirectory(${imath_SOURCE_DIR} ${imath_BINARY_DIR})
   endif()

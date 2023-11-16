@@ -129,6 +129,46 @@ IMF_STD_ATTRIBUTE_DEF (worldToCamera, WorldToCamera, IMATH_NAMESPACE::M44f)
 IMF_STD_ATTRIBUTE_DEF (worldToNDC, WorldToNDC, IMATH_NAMESPACE::M44f)
 
 //
+// sensorCenterOffset -- horizontal and vertical distances, in microns, of
+// the center of the light-sensitive area of the camera's sensor from a point
+// on that sensor where a sensor surface normal would intersect the center
+// of the lens mount. When compared to an image captured with a perfectly
+// centered sensor, an image where both horizontal and vertical distances
+// were positive would contain more content holding what was at the right
+// and what was at the bottom of the scene being captured.
+//
+
+IMF_STD_ATTRIBUTE_DEF (sensorCenterOffset, SensorCenterOffset, IMATH_NAMESPACE::V2f)
+
+//
+// sensorOverallDimensions -- dimensions of the light-sensitive area of the
+// sensor, in millimeters, independent of the subset of that region from
+// which image data are obtained.
+
+IMF_STD_ATTRIBUTE_DEF (
+    sensorOverallDimensions,
+    SensorOverallDimensions,
+    IMATH_NAMESPACE::V2f)
+
+//
+// sensorPhotositePitch -- distance between centers of sensor photosites,
+// in microns.
+
+IMF_STD_ATTRIBUTE_DEF (sensorPhotositePitch, SensorPhotositePitch, float)
+
+//
+// sensorAcquisitionRectangle -- the rectangular area of the sensor containing
+// photosites the contents of which are in one-to-one correspondence with the
+// captured sensels, for a monochrome sensor, or with the reconstructed pixels,
+// for a sensor covered with color filter array material in a Bayer or a
+// similar pattern.
+//
+
+IMF_STD_ATTRIBUTE_DEF (
+    sensorAcquisitionRectangle,
+    SensorAcquisitionRectangle, IMATH_NAMESPACE::Box2i)
+
+//
 // ascFramingDecisionList -- JSON-encoded description of framing decisions
 // associated with the captured image, in a format termed 'ASC-FDL', designed
 // and documented by the American Society of Cinematographers (ASC).
@@ -292,7 +332,7 @@ IMF_STD_ATTRIBUTE_DEF (cameraTintSetting, CameraTintSetting, float)
 //
 // For example, if a physical digital cinema camera was configured with
 // a CCT of 3200K and a tint of -3 (in some camera vendor dependent unit),
-/// and the camera output had been processed such that the image containing
+// and the camera output had been processed such that the image containing
 // this attribute was encoded as per SMPTE ST 2065-4:2023, then 
 // the adoptedNeutral attribute would have the value corresponding to
 // the ACES neutral chromaticity, very near that of CIE Illuminant D60,
@@ -586,8 +626,8 @@ IMF_STD_ATTRIBUTE_DEF (adoptedNeutral, AdoptedNeutral, IMATH_NAMESPACE::V2f)
 // If present, values should be UTF-8-encoded and have nonzero length.
 //
 
-IMF_STD_ATTRIBUTE_DEF (renderingTransform, RenderingTransform, std::string)
-IMF_STD_ATTRIBUTE_DEF (lookModTransform, LookModTransform, std::string)
+IMF_STD_ATTRIBUTE_DEF_DEPRECATED (renderingTransform, RenderingTransform, std::string, "this attribute is obsolete as of OpenEXR v3.2")
+IMF_STD_ATTRIBUTE_DEF_DEPRECATED (lookModTransform, LookModTransform, std::string, "this attribute is obsolete as of OpenEXR v3.2")
 
 //
 // envmap -- if this attribute is present, the image represents
